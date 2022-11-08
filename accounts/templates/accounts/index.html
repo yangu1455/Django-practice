@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block body %}
+
+  {% comment %} 회원 목록 테이블 {% endcomment %}
+
+  {% comment %} 사용자 인증이 되었다면 (user도 되고 request.user도 됨) {% endcomment %}
+  {% if request.user.is_authenticated %}
+    <div class='d-flex align-items-center'>
+      <h1>{{ request.user }}</h1>
+      <a class='btn btn-outline-danger mx-4' href="{% url 'accounts:logout' %}" style='width: 90px; height:35px;'>로그아웃</a>
+    </div>
+  {% endif %}
+
+  index.html
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">pk</th>
+        <th scope="col">제목</th>
+        <th scope="col">email</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+        <tr>
+          <th>{{ user.pk }}</th>
+          <td><a href="{% url 'accounts:detail' user.pk %}">{{ user.username }}</a></td>
+          <td>{{ user.email }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock body %}
