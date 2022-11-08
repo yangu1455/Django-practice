@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block body %}
+
+  <h1>{{ review.title }}</h1>
+  <h2>{{ review.content }}</h2>
+
+  <br>
+  <br>
+
+  작성일 :
+  {{ review.created_at }}
+
+  <br>
+
+  수정일 :
+  {{ review.updated_at }}
+
+  <br>
+  <br>
+
+  <a class='btn btn-outline-info' href="{% url 'articles:update' review.pk %}">수정</a>
+  <a class='btn btn-outline-danger' href="{% url 'articles:delete' review.pk %}">삭제</a>
+
+  <br>
+  <br>
+
+  <a class='btn btn-outline-warning' href="{% url 'articles:index' %}">돌아가기</a>
+
+{% endblock body %}

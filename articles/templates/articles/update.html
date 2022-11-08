@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block body %}
+  <div class="container p-5">
+    <h1 class='mb-3'>글 수정하기</h1>
+    <form action="" method="POST">
+      {% csrf_token %}
+      {% bootstrap_form review_form %}
+      
+      <!-- title -->
+      {% comment %} 
+      <div class="input-group mb-3">
+        <button class="btn btn-outline-info text-black-50" type="button" id="button-addon1">제목</button>
+        <input type="text" class="form-control" aria-label="Example text with button addon" aria-describedby="button-addon1" name="title" value="{{ review.title }}">
+      </div>
+
+      <div class="input-group mb-3">
+        <button class="btn btn-outline-info text-black-50" type="button" id="button-addon1">내용</button>
+         <textarea class="form-control" aria-label="Example text with button addon" aria-describedby="button-addon1" style='height:250px;' name="content">{{ review.content }}</textarea>
+         <input type="text" class="form-control" aria-label="Example text with button addon" aria-describedby="button-addon1" name="content" value="{{ review.content}}">
+      </div>  
+      {% endcomment %}
+
+      <!-- 수정 버튼 -->
+      <div class="container text-center">
+        <button type="submit" class="btn btn-outline-info m-5 px-5">리뷰 수정</button>
+        <a class='btn btn-outline-warning px-5' href="{% url 'articles:index' %}">목록으로</a>
+        {% comment %} <a class='btn btn-outline-warning px-5' href="{% url 'articles:detail' review.pk %}">목록으로</a> - 안되는데 이유를 모르겠음 {% endcomment %}
+      </div>
+    </form>
+  </div>
+
+{% endblock body %}
