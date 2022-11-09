@@ -24,7 +24,8 @@ def create(request):
     # 유효성 검사
     if request.method == 'POST':
         # DB에 저장하는 로직
-        review_form = ReviewForm(request.POST)
+        review_form = ReviewForm(request.POST, request.FILES)
+        print(request.FILES)
         if review_form.is_valid():
             review_form.save()
             return redirect('articles:index')

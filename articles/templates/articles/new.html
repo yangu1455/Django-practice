@@ -4,11 +4,11 @@
 {% block body %}
   <div>
     <h1 class='mb-3'>새 글 쓰기</h1>
-    <form action="{% url 'articles:create' %}" method="POST">
+    <form action="{% url 'articles:create' %}" method="POST" enctype='multipart/form-data'>
       {% csrf_token %}
-      {% comment %} {% bootstrap_form review_form %} {% endcomment %}
+      {% bootstrap_form review_form %}
       <!-- title -->
-      <div class="input-group mb-3">
+      {% comment %} <div class="input-group mb-3">
         <button class="btn btn-outline-info text-black-50" type="button" id="button-addon1">제목</button>
         <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" name="title">
       </div>
@@ -17,7 +17,12 @@
       <div class="input-group mb-3">
         <button class="btn btn-outline-info text-black-50" type="button" id="button-addon1">내용</button>
         <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" style='height:250px;' name="content">
-      </div>
+      </div> 
+
+      <div class="input-group">
+        <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+        <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Button</button>
+      </div> {% endcomment %}
 
       <!-- button -->
       <div class="container text-center">
