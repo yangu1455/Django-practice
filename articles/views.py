@@ -25,7 +25,6 @@ def create(request):
     if request.method == 'POST':
         # DB에 저장하는 로직
         review_form = ReviewForm(request.POST, request.FILES)
-        print(request.FILES)
         if review_form.is_valid():
             review_form.save()
             return redirect('articles:index')
@@ -35,7 +34,7 @@ def create(request):
     context = {
         'review_form' : review_form,
     }
-    return render(request, 'articles/new.html', context=context)    
+    return render(request, 'articles/form.html', context=context)    
     # else:
     #     # 여러가지 방법이 있음
     #     # return render(....)
@@ -47,7 +46,7 @@ def update(request, pk):
     review = Review.objects.get(pk=pk)
     if request.method == "POST":
         # POST : input 값 가져와서 검증하고, DB에 저장
-        review_form = ReviewForm(request.POST, instance=review)
+        review_form = ReviewForm(request.POST, request.FILES, instance=review)
         # 유효성 검사
         if review_form.is_valid():
             # 유효하면 세이브
@@ -63,7 +62,7 @@ def update(request, pk):
     context = {
         "review_form": review_form,
     }
-    return render(request, "articles/update.html", context)
+    return render(request, "articles/form.html", context)
 
 @login_required
 def delete(request, pk):
