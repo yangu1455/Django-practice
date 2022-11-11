@@ -13,12 +13,12 @@
   <br>
 
   작성일 :
-  {{ review.created_at }}
+  {{ review.created_at|date:"SHORT_DATETIME_FORMAT" }}
 
   <br>
 
   수정일 :
-  {{ review.updated_at }}
+  {{ review.updated_at|date:"y-m-d D" }}
 
   <br>
   <br>
