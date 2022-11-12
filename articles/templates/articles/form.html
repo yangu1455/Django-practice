@@ -11,24 +11,22 @@
     
     <form action="" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
-      {% bootstrap_form review_form %}
+      {% comment %} {% bootstrap_form review_form %} {% endcomment %}
       
       <!-- title -->
-      {% comment %} <div class="input-group mb-3">
+      <div class="input-group mb-3">
         <button class="btn btn-outline-info text-black-50" type="button" id="button-addon1">제목</button>
-        <input type="text" class="form-control" aria-label="Example text with button addon" aria-describedby="button-addon1" name="title" value="{{ review.title }}">
+        <input type="text" class="form-control" name="title" value="{{ review.title }}">
       </div>
 
       <div class="input-group mb-3">
         <button class="btn btn-outline-info text-black-50" type="button" id="button-addon1">내용</button>
-         <textarea class="form-control" aria-label="Example text with button addon" aria-describedby="button-addon1" style='height:400px;' name="content">{{ review.content }}</textarea>
-         {% comment %} <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" style='height:250px;' name="content" value="{{ review.content}}">
+         <textarea class="form-control" style='height:400px;' name="content">{{ review.content }}</textarea>
       </div>  
 
       <div class="input-group mb-3">
-        <input type="file" class="form-control" name='image' accept="image/*" value="{{ review.image }}" id="id_image" aria-describedby="inputGroupFileAddon04" aria-label="Upload" >
-        <button class="btn btn-outline-info text-black-50" type="button" id="inputGroupFileAddon04">수정</button>
-      </div> {% endcomment %}
+        <input type="file" class="form-control" name='image' accept="image/*" value="{{ review.image }}" id="id_image">
+      </div>
 
       <!-- 수정 버튼 -->
       <div class="container text-center">
