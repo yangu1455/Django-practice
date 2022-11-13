@@ -28,11 +28,16 @@
         <input type="file" class="form-control" name='image' accept="image/*" value="{{ review.image }}" id="id_image">
       </div>
 
-      <!-- 수정 버튼 -->
+      <!-- 버튼 -->
       <div class="container text-center">
         <button type="submit" class="btn btn-outline-info m-5 px-5">OK</button>
+        {% comment %} {% if request.resolver_match.url_name == 'create' %}
+          <a class='btn btn-outline-warning px-5' href="{% url 'articles:detail' review.pk %}">뒤로가기</a>
+        {% else %}
+          <a class='btn btn-outline-warning px-5' href="{% url 'articles:index' %}">목록으로</a>
+        {% endif %} - 응 같은 이유로 실패 {% endcomment %}
+        {% comment %} <a class='btn btn-outline-warning px-5' href="{% url 'articles:detail' review.pk %}">목록으로</a> - 안되는 이유를 모르겠음 알것도 같은데 아리까리함 {% endcomment %}
         <a class='btn btn-outline-warning px-5' href="{% url 'articles:index' %}">목록으로</a>
-        {% comment %} <a class='btn btn-outline-warning px-5' href="{% url 'articles:detail' review.pk %}">목록으로</a> - 안되는데 이유를 모르겠음 {% endcomment %}
       </div>
     </form>
   </div>
