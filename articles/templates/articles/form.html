@@ -24,9 +24,17 @@
          <textarea class="form-control" style='height:400px;' name="content">{{ review.content }}</textarea>
       </div>  
 
-      <div class="input-group mb-3">
+      <div class="input-group mb-1">
         <input type="file" class="form-control" name='image' accept="image/*" value="" id="id_image">
       </div>
+
+      <div class='d-flex'>
+        {% comment %} 이미지가 있는 경우 현재 이미지 경로 보여주기 {% endcomment %}
+        {% if review.image %}
+        <p>현재 등록된 이미지 : </p>
+        <a href="{{ review.image.url }}"><p class='mx-2'>{{ review.image }}</p></a>
+        {% endif %}
+      </div> 
 
       <!-- 버튼 -->
       <div class="container text-center">

@@ -61,7 +61,7 @@ def update(request, pk):
 
     context = {
         "review_form": review_form,
-        'review' : review,
+        'review' : review, # 이걸 안넣어주면 커스텀한 폼에 데이터도 안들어가고 돌아가기 버튼도 안되는데 왜그런지는 모르겠음 위에서 지정해주잖아
     }
     return render(request, "articles/form.html", context)
 
