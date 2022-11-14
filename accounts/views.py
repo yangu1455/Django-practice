@@ -67,7 +67,7 @@ def login(request):
             #     return redirect(request.GET.get('next'))
             # else:
             #     return redirect('accounts:index')
-            return redirect(request.GET.get('next') or 'main')
+            return redirect(request.GET.get('next') or 'articles:index')
     else:
         form = AuthenticationForm()
 
@@ -80,7 +80,7 @@ def login(request):
 # 로그아웃
 def logout(request):
     auth_logout(request)
-    return redirect('main')
+    return redirect('articles:index')
 
 
 # 회원 정보 수정

@@ -5,17 +5,7 @@
 
   {% comment %} 게시판 - 리뷰 목록 {% endcomment %}
 
-  {% comment %} 사용자 인증이 되었다면 (user도 되고 request.user도 됨) {% endcomment %}
-  {% if request.user.is_authenticated %}
-    <div class='d-flex align-items-center'>
-      <h1>{{ request.user }}</h1>
-      <a class='btn btn-outline-danger mx-4' href="{% url 'accounts:logout' %}" style='width: 90px; height:35px;'>로그아웃</a>
-    </div>
-  {% endif %}
-
-  index.html
-
-  <table class="table">
+  {% comment %} <table class="table">
     <thead>
       <tr>
         <th scope="col">pk</th>
@@ -29,11 +19,29 @@
           <th>{{ review.pk }}</th>
           <td><a href="{% url 'articles:detail' review.pk %}">{{ review.title }}</a></td>
         </tr>
-      {% endfor %}
+      
     </tbody>
-  </table>
+  </table> {% endcomment %}
 
-  <br>
+  <div class='row mb-3'>
+    {% for review in reviews %}
+    <div class='col-xxl-3 col-lg-4 col-md-6 col-xs-12 my-2'>
+      {% comment %} 여기서부터 카드로 {% endcomment %}
+      <div class="card" style="width: 18rem; height:18rem;">
+        {% if review.image %}
+        <img src="{{ review.image.url }}" class="card-img-top" alt="...">
+        {% else %}
+        <img src="https://dummyimage.com/400x300/ffffff/f4adff.jpg&text=no+image" alt="">
+        {% endif %}
+        <div class="card-body">
+          <a href="{% url 'articles:detail' review.pk %}" class='link-secondary stretched-link' style="text-decoration:none">
+            <h5 class="card-title">{{ review.title }}</h5>
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 
   <a class='btn btn-outline-info' href="{% url 'articles:create' %}">새 글 쓰기</a>
 
