@@ -61,6 +61,7 @@ def update(request, pk):
 
     context = {
         "review_form": review_form,
+        'review' : review,
     }
     return render(request, "articles/form.html", context)
 
