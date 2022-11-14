@@ -1,4 +1,5 @@
 from multiprocessing import context
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
@@ -43,6 +44,7 @@ def signup(request):
         
             # 로그인 시켜주지 않고 로그인 창으로 보내는 경우
             form.save()
+            messages.success(request, '가입이 완료 되었습니다.')
             return redirect('accounts:login')
     else:
         form = CustomUserCreationForm()
@@ -67,6 +69,7 @@ def login(request):
             #     return redirect(request.GET.get('next'))
             # else:
             #     return redirect('accounts:index')
+            messages.success(request, '로그인 되었습니다.')
             return redirect(request.GET.get('next') or 'articles:index')
     else:
         form = AuthenticationForm()
@@ -80,6 +83,7 @@ def login(request):
 # 로그아웃
 def logout(request):
     auth_logout(request)
+    messages.warning(request, '로그아웃 하였습니다.')
     return redirect('articles:index')
 
 

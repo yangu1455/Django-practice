@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from articles.forms import ReviewForm
 from .models import Review
 from django.contrib.auth.decorators import login_required
@@ -27,6 +28,7 @@ def create(request):
         review_form = ReviewForm(request.POST, request.FILES)
         if review_form.is_valid():
             review_form.save()
+            messages.success(request, '글 작성이 완료되었습니다.')
             return redirect('articles:index')
     else:
         review_form = ReviewForm()

@@ -138,3 +138,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # User Model
 AUTH_USER_MODEL = 'accounts.User'
+
+# Message Framework
+# https://docs.djangoproject.com/en/4.1/ref/contrib/messages/
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
