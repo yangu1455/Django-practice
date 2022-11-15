@@ -16,6 +16,7 @@ def detail(request, pk):
     review = Review.objects.get(pk=pk)
     context = {
         'review' : review,
+        'comments' : review.comment_set.all(),
     }
     return render(request, 'articles/detail.html', context)
 
@@ -53,6 +54,7 @@ def update(request, pk):
         if review_form.is_valid():
             # 유효하면 세이브
             review_form.save()
+            messages.success(request, '글이 수정되었습니다.')
             # 유효성 검사 통과하면 상세보기 페이지로
             return redirect("articles:detail", review.pk)
             
