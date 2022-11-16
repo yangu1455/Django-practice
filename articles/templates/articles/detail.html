@@ -27,6 +27,13 @@
 
   <p>댓글</p>
 
+  <form action="">
+    {% comment %} {% bootstrap_form comment_form layout = 'inline' %} {% endcomment %}
+    {% comment %} <input type="text"> {% endcomment %}
+    <textarea class='form-control w-100' name="comment" id="comment_id" placeholder='댓글을 입력하세요' ></textarea>
+    <button class='btn btn-info my-2' type='submit'>OK</button>
+  </form>
+
   <br>
 
   {% for comment in comments %}

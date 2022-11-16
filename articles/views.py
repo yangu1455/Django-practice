@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from articles.forms import ReviewForm
+from articles.forms import ReviewForm, CommentForm
 from .models import Review
 from django.contrib.auth.decorators import login_required
 
@@ -14,9 +14,11 @@ def index(request):
 
 def detail(request, pk):
     review = Review.objects.get(pk=pk)
+    comment_form = CommentForm()
     context = {
         'review' : review,
         'comments' : review.comment_set.all(),
+        'comment_form' : comment_form,
     }
     return render(request, 'articles/detail.html', context)
 
