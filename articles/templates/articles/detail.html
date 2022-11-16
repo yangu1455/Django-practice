@@ -21,13 +21,19 @@
   {{ review.updated_at|date:"y-m-d D" }}
 
   <br>
+  <br>
+  <br>
+  <div class='comment-line'></div>
 
-  댓글
+  <p>댓글</p>
 
   <br>
 
   {% for comment in comments %}
     <p>{{ comment.content }}</p>
+    <hr>
+    {% empty %}
+    <p>댓글이 없어요 ㅠ_ㅠ</p>
   {% endfor %}
 
   <br>

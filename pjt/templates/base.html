@@ -8,7 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Django-Project</title>
     {% bootstrap_css%}
-    {% block css %}{% endblock css%}
+    <style>
+      .comment-line { 
+        border-top: 2px solid #FF6A89;
+        width: 700px;
+        margin: 30px auto;
+      }
+      {% block css %}
+      {% endblock css%}
+    </style>
   </head>
 
   <body>
