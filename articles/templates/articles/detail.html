@@ -27,9 +27,10 @@
 
   <p>댓글</p>
 
-  <form action="">
+  <form action="{% url 'articles:comment_create' review.pk %}" method='POST'>
     {% comment %} {% bootstrap_form comment_form layout = 'inline' %} {% endcomment %}
     {% comment %} <input type="text"> {% endcomment %}
+    {% csrf_token %}
     <textarea class='form-control w-100' name="comment" id="comment_id" placeholder='댓글을 입력하세요' ></textarea>
     <button class='btn btn-info my-2' type='submit'>OK</button>
   </form>

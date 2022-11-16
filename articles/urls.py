@@ -21,4 +21,7 @@ urlpatterns = [
 
     # 글 삭제 기능
     path('delete/<int:pk>', views.delete, name='delete'),
+
+    # 댓글 생성
+    path('<int:pk>/comments/', views.comment_create, name='comment_create'),
 ]

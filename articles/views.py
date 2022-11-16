@@ -75,3 +75,13 @@ def update(request, pk):
 def delete(request, pk):
     Review.objects.get(pk=pk).delete()
     return redirect('articles:index')
+
+def comment_create(request, pk):
+    review = Review.objects.get(pk=pk)
+    comment_form = CommentForm(request.POST)
+    if comment_form.is_valid():
+        # 멈춰! 사용자가 입력한 값 뿐만이 아니라 다른 값들을 받아서 쓸 수 있게
+        comment = comment_form.save(commit=False)
+        comment.review = review
+        comment.save()
+    return redirect('articles:detail', review.pk)
