@@ -1,6 +1,7 @@
 from django.db import models
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
+from django.conf import settings
 
 '''
 게시판 기능
@@ -20,6 +21,7 @@ class Review(models.Model):
                                 processors=[ResizeToFill(400, 300)],
                                 format='JPEG',
                                 options={'quality': 80})
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
 
 class Comment(models.Model):
