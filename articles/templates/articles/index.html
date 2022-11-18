@@ -36,6 +36,7 @@
         <div class="card-body">
           <a href="{% url 'articles:detail' review.pk %}" class='link-secondary stretched-link' style="text-decoration:none">
             <h5 class="card-title">{{ review.title }}</h5>
+            <p>{{ review.user.username }}</p>
           </a>
         </div>
       </div>

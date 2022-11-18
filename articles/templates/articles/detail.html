@@ -5,6 +5,7 @@
 
   <h1>{{ review.title }}</h1>
   <h2>{{ review.content }}</h2>
+  <h3>{{ review.user }}</h3>
   {% if review.image %}
     <img src="{{ review.image.url }}" alt="{{ review.image }}" width='60%' height='60%'>
   {% endif %}
@@ -28,10 +29,10 @@
   <p>댓글</p>
 
   <form action="{% url 'articles:comment_create' review.pk %}" method='POST'>
-    {% comment %} {% bootstrap_form comment_form layout = 'inline' %} {% endcomment %}
+    {% comment %} {% bootstrap_form comment_form %} {% endcomment %}
     {% comment %} <input type="text"> {% endcomment %}
     {% csrf_token %}
-    <textarea class='form-control w-100' name="comment" id="comment_id" placeholder='댓글을 입력하세요' ></textarea>
+    <textarea class='form-control w-100' name="content" id="comment_content_id" placeholder='댓글을 입력하세요' ></textarea>
     <button class='btn btn-info my-2' type='submit'>OK</button>
   </form>
 

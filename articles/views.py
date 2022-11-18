@@ -30,7 +30,10 @@ def create(request):
         # DB에 저장하는 로직
         review_form = ReviewForm(request.POST, request.FILES)
         if review_form.is_valid():
-            review_form.save()
+            review = review_form.save(commit=False)
+            # 로그인한 유저 => 작성자네!
+            review.user = request.user
+            review.save()
             messages.success(request, '글 작성이 완료되었습니다.')
             return redirect('articles:index')
     else:
@@ -83,5 +86,7 @@ def comment_create(request, pk):
         # 멈춰! 사용자가 입력한 값 뿐만이 아니라 다른 값들을 받아서 쓸 수 있게
         comment = comment_form.save(commit=False)
         comment.review = review
+        # 작성자 정보도 저장
+        comment.user = request.user
         comment.save()
     return redirect('articles:detail', review.pk)
