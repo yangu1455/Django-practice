@@ -23,5 +23,8 @@ urlpatterns = [
     path('delete/<int:pk>', views.delete, name='delete'),
 
     # 댓글 생성
-    path('<int:pk>/comments/', views.comment_create, name='comment_create'),
+    path('<int:pk>/comment/', views.comment_create, name='comment_create'),
+
+    # 댓글 삭제
+    path('<int:pk>/comment/delete/', views.comment_delete, name='comment_delete'),
 ]

@@ -5,7 +5,7 @@
 
   <h1>{{ review.title }}</h1>
   <h2>{{ review.content }}</h2>
-  <h3>작성자 : {{ review.user }}</h3>
+  <h3>작성자 : <a href="{% url 'accounts:detail' review.user.pk %}">{{ review.user }}</a></h3>
   {% if review.image %}
     <img src="{{ review.image.url }}" alt="{{ review.image }}" width='60%' height='60%'>
   {% endif %}
@@ -40,6 +40,12 @@
   {% for comment in comments %}
     <p>작성자 : {{ comment.user.username }}</p>
     <p>{{ comment.content }}</p>
+    {% if request.user == comment.user %}
+      {% comment %} <form action="{% url 'articles:comment_delete' review.pk comment.pk %}" method='POST'> {% endcomment %}
+        {% csrf_token %}
+        <input class='btn btn-outline-danger' type="submit" value='삭제'>
+      </form>
+    {% endif %}
     <hr>
     {% empty %}
     <p>댓글이 없어요 ㅠ_ㅠ</p>

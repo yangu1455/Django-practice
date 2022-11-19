@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from articles.forms import ReviewForm, CommentForm
-from .models import Review
+from .models import Review, Comment
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -79,6 +79,7 @@ def delete(request, pk):
     Review.objects.get(pk=pk).delete()
     return redirect('articles:index')
 
+@login_required
 def comment_create(request, pk):
     review = Review.objects.get(pk=pk)
     comment_form = CommentForm(request.POST)
@@ -90,3 +91,10 @@ def comment_create(request, pk):
         comment.user = request.user
         comment.save()
     return redirect('articles:detail', review.pk)
+
+@login_required
+def comment_delete(request, review_pk, comment_pk):
+    comment = Comment.objects.get(pk=comment_pk)
+    if request.user == comment.user:
+        comment.delete()
+    return redirect('articles:detail', review_pk)
