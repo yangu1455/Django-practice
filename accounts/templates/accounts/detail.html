@@ -19,24 +19,29 @@
   <br>
   <br>
 
-  작성한 글 :
-  <p class='text-muted'>{{ user.review_set.count }}개</p>
-  {% for review in user.review_set.all %}
-    <div class='my-1'>
-      {{ forloop.counter }}
-      <a href='{% url 'articles:detail' review.pk %}'>{{ review.title }}</a>
+  <div class='row'>
+    <div class='col-6'>
+      작성한 글 :
+      <p class='text-muted'>{{ user.review_set.count }}개</p>
+      {% for review in user.review_set.all %}
+        <div class='my-1'>
+          {{ forloop.counter }}
+          <a href='{% url 'articles:detail' review.pk %}'>{{ review.title }}</a>
+        </div>
+      {% endfor %}
+      <br>
     </div>
-  {% endfor %}
-  <br>
-
-  작성한 댓글 :
-  <p class='text-muted'>{{ user.comment_set.count }}개</p>
-  {% for comment in user.comment_set.all %}
-    <div class='my-1'>
-      {{ forloop.counter }}
-      <a href='{% url 'articles:detail' comment.review.pk %}'>{{ comment.content }}</a>
+    <div class='col-6'>
+      작성한 댓글 :
+      <p class='text-muted'>{{ user.comment_set.count }}개</p>
+      {% for comment in user.comment_set.all %}
+        <div class='my-1'>
+          {{ forloop.counter }}
+          <a href='{% url 'articles:detail' comment.review.pk %}'>{{ comment.content }}</a>
+        </div>
+      {% endfor %}
     </div>
-  {% endfor %}
+  </div>
 
   <br>
   <br>

@@ -27,13 +27,14 @@
   <div class='comment-line'></div>
 
   <p>댓글</p>
-
+  {% if request.user.is_authenticated %}
   <form action="{% url 'articles:comment_create' review.pk %}" method='POST'>
     {% comment %} {% bootstrap_form comment_form %} {% endcomment %}
     {% csrf_token %}
     <textarea class='form-control w-100' name="content" id="comment_content_id" placeholder='댓글을 입력하세요' ></textarea>
     <button class='btn btn-info my-2' type='submit'>OK</button>
   </form>
+  {% endif %}
 
   <br>
 
@@ -53,8 +54,10 @@
 
   <br>
 
+  {% if request.user == review.user %}
   <a class='btn btn-outline-info mx-1' href="{% url 'articles:update' review.pk %}">수정</a>
   <a class='btn btn-outline-danger mx-1' href="{% url 'articles:delete' review.pk %}">삭제</a>
+  {% endif %}
   <a class='btn btn-outline-warning mx-1' href="{% url 'articles:index' %}">돌아가기</a>
 
 {% endblock body %}

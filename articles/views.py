@@ -52,27 +52,38 @@ def create(request):
 @login_required
 def update(request, pk):
     review = Review.objects.get(pk=pk)
-    if request.method == "POST":
-        # POST : input 값 가져와서 검증하고, DB에 저장
-        review_form = ReviewForm(request.POST, request.FILES, instance=review)
-        # 유효성 검사
-        if review_form.is_valid():
-            # 유효하면 세이브
-            review_form.save()
-            messages.success(request, '글이 수정되었습니다.')
-            # 유효성 검사 통과하면 상세보기 페이지로
-            return redirect("articles:detail", review.pk)
-            
-    # 유효성검사 통과하지 않으면 => context부터해서 오류메시지 담긴 article_form을 랜더링
-    else:
-        # GET : Form을 제공
-        review_form = ReviewForm(instance=review)
+    if request.user == review.user:
+        if request.method == "POST":
+            # POST : input 값 가져와서 검증하고, DB에 저장
+            review_form = ReviewForm(request.POST, request.FILES, instance=review)
+            # 유효성 검사
+            if review_form.is_valid():
+                # 유효하면 세이브
+                review_form.save()
+                messages.success(request, '글이 수정되었습니다.')
+                # 유효성 검사 통과하면 상세보기 페이지로
+                return redirect("articles:detail", review.pk)
+                
+        # 유효성검사 통과하지 않으면 => context부터해서 오류메시지 담긴 article_form을 랜더링
+        else:
+            # GET : Form을 제공
+            review_form = ReviewForm(instance=review)
 
-    context = {
-        "review_form": review_form,
-        'review' : review, # 이걸 안넣어주면 커스텀한 폼에 데이터도 안들어가고 돌아가기 버튼도 안되는데 왜그런지는 모르겠음 위에서 지정해주잖아
-    }
-    return render(request, "articles/form.html", context)
+        context = {
+            "review_form": review_form,
+            'review' : review, # 이걸 안넣어주면 커스텀한 폼에 데이터도 안들어가고 돌아가기 버튼도 안되는데 왜그런지는 모르겠음 위에서 지정해주잖아
+        }
+        return render(request, "articles/form.html", context)
+    else:
+        # 작성자가 아닐 때
+        # 1. 403 에러메세지를 던져버린다.
+        # from django.http import HttpResponseForbidden
+        # return HttpResponseForbidden()
+
+        # 2. flash message 활용!
+        messages.warning(request, '작성자만 수정할 수 있습니다.')
+        return redirect('articles:detail', review.pk)
+
 
 @login_required
 def delete(request, pk):
