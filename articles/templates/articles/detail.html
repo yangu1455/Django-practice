@@ -39,7 +39,7 @@
   <br>
 
   {% for comment in comments %}
-    <p>작성자 : {{ comment.user.username }}</p>
+    <p>작성자 : {{ comment.user }}</p>
     <p>{{ comment.content }}</p>
     {% if request.user == comment.user %}
       {% comment %} <form action="{% url 'articles:comment_delete' review.pk comment.pk %}" method='POST'> {% endcomment %}
